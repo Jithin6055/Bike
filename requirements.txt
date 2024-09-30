@@ -8,3 +8,4 @@ gunicorn
 psycopg2-binary
 django-cors-headers
 django_light
+django-admin-tools-stats
