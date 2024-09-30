@@ -1,9 +1,9 @@
-Django==5.1
-djangorestframework==3.14.0
-requests==2.32.3
-numpy==1.26.4
-pandas==2.2.2
-tensorflow==2.17.0
-gunicorn==23.0.0
-psycopg2-binary==2.9.9  # If using PostgreSQL
-django-cors-headers==3.16.0  # If using CORS
+Django
+djangorestframework
+requests
+numpy
+pandas
+tensorflow
+gunicorn
+psycopg2-binary
+django-cors-headers
