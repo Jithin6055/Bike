@@ -1,0 +1,48 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Booking Confirmation{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="text-center mt-5">
+                <h2 class="mb-4">Booking Confirmed!</h2>
+                <p class="lead">Thank you for booking a bike with WheelStreet. Here are your booking details:</p>
+            </div>
+
+            <table class="table table-bordered mt-4">
+                <tr>
+                    <th>Bike</th>
+                    <td>{{ booking.bike.brand }} {{ booking.bike.model }}</td>
+                </tr>
+                <tr>
+                    <th>Pickup Location</th>
+                    <td>{{ booking.pickup_location.name }}</td>
+                </tr>
+                <tr>
+                    <th>Pickup Date & Time</th>
+                    <td>{{ booking.pickup_date }}</td>
+                </tr>
+                <tr>
+                    <th>Dropoff Location</th>
+                    <td>{{ booking.dropoff_location.name }}</td>
+                </tr>
+                <tr>
+                    <th>Dropoff Date & Time</th>
+                    <td>{{ booking.dropoff_date }}</td>
+                </tr>
+                <tr>
+                    <th>Total Price</th>
+                    <td>Rs. {{ booking.total_price }}</td>
+                </tr>
+            </table>
+
+            <div class="text-center mt-4">
+                <a href="{% url 'my_bookings' %}" class="btn btn-primary">View My Bookings</a>
+                <a href="{% url 'home' %}" class="btn btn-secondary">Return to Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

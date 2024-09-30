@@ -1,0 +1,143 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Welcome to WheelStreet{% endblock %}
+
+{% block content %}
+<div class="welcome-container">
+    <div class="welcome-message">
+        {% if messages %}
+        <div class="alert-container">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <h1>Welcome to WheelStreet!</h1>
+        <p>Your one-stop solution for bike rentals.</p>
+        <a href="{% url 'bike_list' %}" class="rent-button">Rent a Bike</a>
+    </div>
+</div>
+
+<!-- Floating Button for Rent a Bike -->
+<a href="{% url 'bike_list' %}" class="floating-button">+</a>
+
+<!-- CSS Section -->
+<style>
+/* General Styling */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Welcome Page Container */
+.welcome-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto; /* Changed to 100% for full width */
+    height: 100vh; /* Full height */
+    background-image: url('https://sriramcars.com/wp-content/uploads/2023/10/Luxury-Bike-Rental.png');
+    background-size: cover; /* Cover the whole area */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent tiling */
+}
+
+/* Welcome Message Box */
+.welcome-message {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.65);
+    padding: 50px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    margin: auto; /* Center the box */
+}
+
+/* Heading Styling */
+.welcome-message h1 {
+    font-size: 3.5rem;
+    color: #ffffff;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+/* Paragraph Styling */
+.welcome-message p {
+    font-size: 1.5rem;
+    color: #dddddd;
+    margin-bottom: 30px;
+}
+
+/* Rent a Bike Button */
+.rent-button {
+    display: inline-block;
+    background-color: #28a745;
+    color: #ffffff;
+    padding: 15px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.rent-button:hover {
+    background-color: #218838;
+    transform: translateY(-3px);
+}
+
+/* Floating Button */
+.floating-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #007bff;
+    color: #ffffff;
+    border-radius: 50%;
+    font-size: 32px;
+    text-align: center;
+    line-height: 60px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+    text-decoration: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.floating-button:hover {
+    background-color: #0056b3;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .welcome-message h1 {
+        font-size: 2.5rem;
+    }
+
+    .welcome-message p {
+        font-size: 1.2rem;
+    }
+
+    .rent-button {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+
+    .floating-button {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        line-height: 50px;
+    }
+}
+</style>
+{% endblock %}

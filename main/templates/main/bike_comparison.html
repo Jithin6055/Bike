@@ -1,0 +1,58 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Bike Comparison{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="my-4 text-center">Bike Comparison: {{ bike1.brand }} {{ bike1.model }} vs. {{ bike2.brand }} {{ bike2.model }}</h2>
+
+    <div class="comparison-table">
+        <h4>Specifications Comparison:</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Specification</th>
+                    <th>{{ bike1.brand }} {{ bike1.model }}</th>
+                    <th>{{ bike2.brand }} {{ bike2.model }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Price per Hour</td>
+                    <td>Rs. {{ bike1.price_per_hour }}</td>
+                    <td>Rs. {{ bike2.price_per_hour }}</td>
+                </tr>
+                <tr>
+                    <td>Mileage</td>
+                    <td>{{ bike1.mileage }} km/l</td>
+                    <td>{{ bike2.mileage }} km/l</td>
+                </tr>
+                <tr>
+                    <td>Type</td>
+                    <td>{{ bike1.bike_type }}</td>
+                    <td>{{ bike2.bike_type }}</td>
+                </tr>
+                <tr>
+                    <td>Image</td>
+                    <td><img src="{{ bike1.image.url }}" alt="{{ bike1.brand }} {{ bike1.model }}" style="max-width: 150px;"></td>
+                    <td><img src="{{ bike2.image.url }}" alt="{{ bike2.brand }} {{ bike2.model }}" style="max-width: 150px;"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="comparison-content">
+        <h4>Comparison Summary:</h4>
+        <p>{{ comparison_text }}</p>
+    </div>
+
+    <!-- Best bike section -->
+    <div class="best-bike mt-4">
+        <h4>Best Bike:</h4>
+        <p>The best bike is <strong>{{ best_bike.brand }} {{ best_bike.model }}</strong> based on mileage!</p>
+        <a href="{% url 'bike_detail' best_bike.id %}" class="btn btn-primary">View Details</a>
+    </div>
+    
+    <a href="{% url 'bike_comparison' %}" class="btn btn-secondary mt-3">Compare Again</a>
+</div>
+{% endblock %}

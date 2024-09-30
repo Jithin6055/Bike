@@ -1,0 +1,35 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Compare Bikes{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="my-4 text-center">Bike Comparison</h2>
+    
+    <form method="POST" action="{% url 'bike_comparison' %}">
+        {% csrf_token %}
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="bike1" class="form-label">Select Bike 1</label>
+                <select name="bike1" id="bike1" class="form-select" required>
+                    <option value="" disabled selected>Select a bike</option>
+                    {% for bike in bikes %}
+                        <option value="{{ bike.id }}">{{ bike.brand }} {{ bike.model }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="bike2" class="form-label">Select Bike 2</label>
+                <select name="bike2" id="bike2" class="form-select" required>
+                    <option value="" disabled selected>Select a bike</option>
+                    {% for bike in bikes %}
+                        <option value="{{ bike.id }}">{{ bike.brand }} {{ bike.model }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Compare</button>
+    </form>
+</div>
+{% endblock %}

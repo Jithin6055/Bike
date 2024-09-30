@@ -1,0 +1,39 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Available Bikes{% endblock %}
+
+{% block content %}
+<div class="container text-center" style="margin-top: 100px;">  <!-- Added margin-top -->
+    <h2 class="my-4">Available Bikes</h2>
+    <div class="row justify-content-center">
+        {% for bike in bikes %}
+        <div class="col-md-4">
+            <div class="card mb-4 d-flex flex-column">
+                {% if bike.image %}
+                <img src="{{ bike.image.url }}" class="card-img-top" alt="{{ bike.model }}" style="object-fit: cover; height: 250px;">
+                {% else %}
+                <img src="https://thumbs.dreamstime.com/b/abstract-racing-motorcycle-white-background-d-41156896.jpg" class="card-img-top" alt="Default Image" style="object-fit: cover; height: 200px;">
+                {% endif %}
+                <div class="card-body flex-grow-1">
+                    <h5 class="card-title">{{ bike.brand }} {{ bike.model }}</h5>
+                    <p class="card-text">{{ bike.description|truncatewords:8 }}</p>
+                    <a href="{% url 'bike_detail' bike.id %}" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Placeholder for a message when no bikes are available -->
+    {% if not bikes %}
+    <div class="alert alert-warning text-center mt-4" role="alert">
+        No bikes are currently available for rent.
+    </div>
+    {% endif %}
+</div>
+
+<!-- Optional Footer Message -->
+<footer class="text-center mt-4">
+    <p>&copy; {{ current_year }} WheelStreet. All rights reserved.</p>
+</footer>
+{% endblock %}

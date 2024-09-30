@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Bike Rental{% endblock %}</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Base Template CSS -->
+    <style>
+        /* General Styles */
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #e66465, #9198e5); /* Background gradient */
+            color: #333;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Main Content Area */
+        .content {
+            flex: 1; /* Ensure content clears the fixed navbar */
+            padding: 20px;
+            min-height: 100vh; /* Full viewport height */
+        }
+
+        /* Alerts Styling */
+        .alert-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Footer Styling */
+        footer {
+            padding: 15px 0;
+            background-color: #f8f9fa;
+            text-align: center;
+            width: 100%;
+            margin-top: auto;
+            border-top: 1px solid #ddd; /* Light border */
+        }
+
+        /* Heading Styling */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+        }
+
+        /* Additional Styles Placeholder */
+        {% block extra_css %}{% endblock %}
+    </style>
+</head>
+<body>
+
+    <!-- Include Header (Navbar) -->
+    {% include 'main/header.html' %}
+
+    <!-- Main Content Section -->
+    <div class="content">
+        <!-- Alert Messages (Bootstrap) -->
+        {% if messages %}
+        <div class="alert-container">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        <!-- Page Content (Extended in Child Templates) -->
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Include Footer -->
+    {% include 'main/footer.html' %}
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Additional Scripts Placeholder -->
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

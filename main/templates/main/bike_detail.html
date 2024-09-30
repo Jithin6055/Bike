@@ -1,0 +1,27 @@
+{% extends 'main/base.html' %}
+
+{% block title %}{{ bike.brand }} {{ bike.model }}{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5"> <!-- Added top margin for spacing -->
+    <h2 class="mb-4">{{ bike.brand }} {{ bike.model }}</h2>
+    <div class="row justify-content-center"> <!-- Center the row content -->
+        <div class="col-md-6 mb-4"> <!-- Added margin bottom for spacing -->
+            {% if bike.image %}
+            <img src="{{ bike.image.url }}" class="img-fluid rounded" alt="{{ bike.model }}"> <!-- Rounded corners using Bootstrap class -->
+            {% else %}
+            <img src="https://thumbs.dreamstime.com/b/abstract-racing-motorcycle-white-background-d-41156896.jpg" class="img-fluid rounded" alt="Default Image"> <!-- Default image -->
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            <div class="bg-light p-3 rounded shadow-sm"> <!-- Added background, padding, and shadow for emphasis -->
+                <p class="mb-2"><strong>Description:</strong></p>
+                <p>{{ bike.description }}</p>
+                <p class="mb-2"><strong>Price per hour:</strong> Rs. {{ bike.price_per_hour }}</p>
+                <p class="mb-2"><strong>Mileage:</strong> {{ bike.mileage }} km</p>
+                <a href="{% url 'rent_bike' bike.id %}" class="btn btn-success">Rent this Bike</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Rent {{ bike.brand }} {{ bike.model }}{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5"> <!-- Added top margin for spacing -->
+    <h2 class="mb-4">Rent {{ bike.brand }} {{ bike.model }}</h2>
+    <form method="POST" class="mx-auto" style="max-width: 600px;"> <!-- Center the form and limit its width -->
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            <label for="pickup_location_id" class="form-label">Pickup Location</label>
+            <select id="pickup_location_id" name="pickup_location_id" class="form-select" required>
+                {% for location in locations %}
+                <option value="{{ location.id }}">{{ location.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="dropoff_location_id" class="form-label">Dropoff Location</label>
+            <select id="dropoff_location_id" name="dropoff_location_id" class="form-select" required>
+                {% for location in locations %}
+                <option value="{{ location.id }}">{{ location.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="pickup_date" class="form-label">Pickup Date and Time</label>
+            <input type="datetime-local" id="pickup_date" name="pickup_date" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="dropoff_date" class="form-label">Dropoff Date and Time</label>
+            <input type="datetime-local" id="dropoff_date" name="dropoff_date" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Confirm Rental</button>
+    </form>
+</div>
+{% endblock %}

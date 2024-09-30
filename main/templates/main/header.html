@@ -1,0 +1,74 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'home' %}" style="font-size: 1.75rem; font-weight: bold; color: #007BFF;">WheelStreet</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'bike_list' %}" style="font-weight: 500;">Bikes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'bike_comparison' %}" style="font-weight: 500;">Compare Bikes</a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'my_bookings' %}" style="font-weight: 500;">My Bookings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}" style="font-weight: 500;">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}" style="font-weight: 500;">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'signup' %}" style="font-weight: 500;">Sign Up</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Optional CSS Styles -->
+<style>
+    .navbar {
+        background-color: #f8f9fa !important; /* Light background color */
+        transition: background-color 0.3s; /* Smooth transition on scroll */
+    }
+
+    .navbar.scrolled {
+        background-color: #ffffff; /* Change background color when scrolled */
+    }
+
+    .nav-link {
+        transition: color 0.3s; /* Smooth color transition */
+    }
+
+    .nav-link:hover {
+        color: #0056b3; /* Change color on hover */
+    }
+
+    .navbar-brand:hover {
+        color: #0056b3; /* Change color on hover */
+    }
+
+    /* Adding some box shadow to navbar for depth */
+    .shadow {
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<!-- Optional JS for scroll effect -->
+<script>
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+</script>
