@@ -1,0 +1,111 @@
+{% block content %}
+<div class="container mt-5">
+    <h2>Bike Rentals by Type</h2>
+
+    <!-- Pie Chart for Bike Rentals by Type -->
+    <canvas id="bikeRentalChart" width="400" height="400"></canvas>
+</div>
+
+<div class="container mt-5">
+    <h2>Most Rented Bikes</h2>
+
+    <!-- Date Filter Form for Most Rented Bikes -->
+    <form method="get" class="mb-4">
+        <div class="form-group row">
+            <label for="start_date" class="col-sm-2 col-form-label">Start Date:</label>
+            <div class="col-sm-3">
+                <input type="date" class="form-control" id="start_date" name="start_date" value="{{ start_date }}">
+            </div>
+            <label for="end_date" class="col-sm-2 col-form-label">End Date:</label>
+            <div class="col-sm-3">
+                <input type="date" class="form-control" id="end_date" name="end_date" value="{{ end_date }}">
+            </div>
+            <div class="col-sm-2">
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Bar Chart for Most Rented Bikes -->
+    <canvas id="rentalChart" width="400" height="400"></canvas>
+</div>
+
+<!-- Include Chart.js for rendering the charts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Script for Pie Chart -->
+<script>
+    const bikeTypes = {{ bike_types|safe }};
+    const rentalCountsByType = {{ rental_counts|safe }};
+
+    const bikeRentalCtx = document.getElementById('bikeRentalChart').getContext('2d');
+    const bikeRentalChart = new Chart(bikeRentalCtx, {
+        type: 'pie',
+        data: {
+            labels: bikeTypes,  // Bike types as labels
+            datasets: [{
+                label: 'Number of Rentals',
+                data: rentalCountsByType,  // Rental counts by bike type
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+            }
+        }
+    });
+</script>
+
+<!-- Script for Bar Chart -->
+<script>
+    const rentalChartCtx = document.getElementById('rentalChart').getContext('2d');
+    const rentalChart = new Chart(rentalChartCtx, {
+        type: 'bar',
+        data: {
+            labels: {{ bike_models|safe }},  // Bike models as labels
+            datasets: [{
+                label: 'Number of Rentals',
+                data: {{ rental_counts_by_model|safe }},  // Rental counts by bike model
+                backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+<style>
+    /* Additional CSS to style the chart containers */
+    #bikeRentalChart, #rentalChart {
+        max-width: 400px;  /* Set maximum width for the charts */
+        max-height: 400px; /* Set maximum height for the charts */
+        margin: 0 auto;    /* Center the charts */
+    }
+</style>
+{% endblock %}

@@ -3,6 +3,46 @@
 {% block title %}Welcome to WheelStreet{% endblock %}
 
 {% block content %}
+
+<section class="main swiper mySwiper">
+    <div class="wrapper swiper-wrapper">
+      <div class="slide swiper-slide">
+        <img src="https://cdn.pixabay.com/photo/2016/03/27/17/59/motorcycle-1283299_1280.jpg" alt="" class="image" />
+        <div class="image-data">
+          <span class="text">Enjoy the Ride </span>
+          <h2>
+            Enjoy Our Exclusive <br />
+            Rental Ride
+          </h2>
+          <!-- <a href="#" class="button">About Us</a> -->
+        </div>
+      </div>
+      <div class="slide swiper-slide">
+        <img src="https://cdn.pixabay.com/photo/2017/02/18/18/43/motorcycle-2077914_1280.jpg" alt="" class="image" />
+        <div class="image-data">
+          <span class="text">We really like what we do.</span>
+          <h2>
+            Ride a Bike With <br />
+            Perfect Style
+          </h2>
+          <!-- <a href="#" class="button">About Us</a> -->
+        </div>
+      </div>
+      <div class="slide swiper-slide">
+        <img src="https://cdn.pixabay.com/photo/2015/08/27/09/06/bike-909690_640.jpg" alt="" class="image" />
+        <div class="image-data">
+          <span class="text">Making Our Side with love.</span>
+          <h2>
+            Bike and Rental <br />
+          </h2>
+          <!-- <a href="#" class="button">About Us</a> -->
+        </div>
+      </div>
+    </div>
+    <div class="swiper-button-next nav-btn"></div>
+    <div class="swiper-button-prev nav-btn"></div>
+    <div class="swiper-pagination"></div>
+  </section>
 <div class="welcome-container">
     <div class="welcome-message">
         {% if messages %}
@@ -31,8 +71,8 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
+    background-color: #000000;
+    color: #090909;
     line-height: 1.6;
 }
 
@@ -41,23 +81,34 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: auto; /* Changed to 100% for full width */
-    height: 100vh; /* Full height */
-    background-image: url('https://sriramcars.com/wp-content/uploads/2023/10/Luxury-Bike-Rental.png');
-    background-size: cover; /* Cover the whole area */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Prevent tiling */
+    width: 100%;
+    height: 100vh;
+    background: url('/static/images/bike-bg.jpg') center/cover no-repeat;
 }
 
 /* Welcome Message Box */
 .welcome-message {
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.65);
+    background-color: rgba(0, 0, 0, 0.75);
     padding: 50px;
-    border-radius: 12px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    max-width: 500px;
-    margin: auto; /* Center the box */
+    width: 100%;
+    margin: auto;
+    animation: fadeIn 1.5s ease-in-out;
+    position: relative;
+    bottom: 70px;
+}
+
+/* Keyframe Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Heading Styling */
@@ -66,6 +117,7 @@ body {
     color: #ffffff;
     font-weight: 700;
     margin-bottom: 20px;
+    animation: fadeIn 2s ease;
 }
 
 /* Paragraph Styling */
@@ -139,5 +191,113 @@ body {
         line-height: 50px;
     }
 }
+
+
+.main {
+  height: 100vh;
+  width: 100%;
+}
+.wrapper,
+.slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.slide {
+  overflow: hidden;
+}
+.slide::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 10;
+}
+.slide .image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.slide .image-data {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+  z-index: 100;
+}
+.image-data span.text {
+  font-size: 14px;
+  font-weight: 400;
+  color: #fff;
+}
+.image-data h2 {
+  font-size: 45px;
+  font-weight: 600;
+  color: #fff;
+}
+a.button {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 25px;
+  color: #333;
+  background: #fff;
+  text-decoration: none;
+  margin-top: 25px;
+  transition: all 0.3s ease;
+}
+a.button:hover {
+  color: #fff;
+  background-color: #c87e4f;
+}
+/* swiper button css */
+.nav-btn {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+}
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+.swiper-button-next {
+  right: 50px;
+}
+.swiper-button-prev {
+  left: 50px;
+}
+.nav-btn::before,
+.nav-btn::after {
+  font-size: 25px;
+  color: #fff;
+}
+.swiper-pagination-bullet {
+  opacity: 1;
+  height: 12px;
+  width: 12px;
+  background-color: #fff;
+  visibility: hidden;
+}
+.swiper-pagination-bullet-active {
+  border: 2px solid #fff;
+  background-color: #c87e4f;
+}
+@media screen and (max-width: 768px) {
+  .nav-btn {
+    visibility: hidden;
+  }
+  .swiper-pagination-bullet {
+    visibility: visible;
+  }
+}
+
+.content{
+    margin-top: 0px;
+    padding-top: 0px;
+}
 </style>
 {% endblock %}
+
+

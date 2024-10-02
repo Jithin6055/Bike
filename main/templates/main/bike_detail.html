@@ -1,27 +1,207 @@
-{% extends 'main/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ bike.brand }} {{ bike.model }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f0f0f5;
+            font-family: 'Arial', sans-serif;
+        }
 
-{% block title %}{{ bike.brand }} {{ bike.model }}{% endblock %}
+        .bike-details {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.4s ease;
+        }
 
+        .bike-details:hover {
+            transform: translateY(-8px);
+        }
+
+        .bike-image-container {
+            background: linear-gradient(135deg, #c3e5f7, #f5f7fa);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            height: 350px; 
+            overflow: hidden;
+        }
+
+        .bike-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+        }
+
+        .bike-info {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .description h4 {
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            color: #444;
+        }
+
+        .description p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .specs {
+            margin-top: 1rem;
+            padding: 1.5rem;
+            border-radius: 10px;
+            background-color: #f5f5f7;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .spec-item {
+            margin-bottom: 0.75rem;
+            font-size: 1.2rem;
+            color: #555;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .rent-btn {
+            font-size: 1.2rem;
+            padding: 0.75rem 1.5rem;
+            margin-top: 2rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .rent-btn:hover {
+            transform: scale(1.08);
+        }
+
+        .comparison-section {
+            background-color: #fff;
+            border-radius: 10px;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .comparison-section h4 {
+            font-size: 1.5rem;
+            color: #444;
+        }
+
+        .comparison-section select {
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .comparison-section button {
+            margin-top: 1rem;
+            padding: 0.5rem 1.5rem;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
 {% block content %}
-<div class="container text-center mt-5"> <!-- Added top margin for spacing -->
-    <h2 class="mb-4">{{ bike.brand }} {{ bike.model }}</h2>
-    <div class="row justify-content-center"> <!-- Center the row content -->
-        <div class="col-md-6 mb-4"> <!-- Added margin bottom for spacing -->
-            {% if bike.image %}
-            <img src="{{ bike.image.url }}" class="img-fluid rounded" alt="{{ bike.model }}"> <!-- Rounded corners using Bootstrap class -->
-            {% else %}
-            <img src="https://thumbs.dreamstime.com/b/abstract-racing-motorcycle-white-background-d-41156896.jpg" class="img-fluid rounded" alt="Default Image"> <!-- Default image -->
-            {% endif %}
-        </div>
-        <div class="col-md-6">
-            <div class="bg-light p-3 rounded shadow-sm"> <!-- Added background, padding, and shadow for emphasis -->
-                <p class="mb-2"><strong>Description:</strong></p>
-                <p>{{ bike.description }}</p>
-                <p class="mb-2"><strong>Price per hour:</strong> Rs. {{ bike.price_per_hour }}</p>
-                <p class="mb-2"><strong>Mileage:</strong> {{ bike.mileage }} km</p>
-                <a href="{% url 'rent_bike' bike.id %}" class="btn btn-success">Rent this Bike</a>
+{% include 'main/header.html' %}
+<div class="container my-5">
+    <div class="row bike-details animate__animated animate__fadeIn">
+        <!-- Left: Bike Image in a Box -->
+        <div class="col-md-4 p-0">
+            <div class="bike-image-container">
+                {% if bike.image %}
+                <img src="{{ bike.image.url }}" class="bike-image" alt="{{ bike.model }}">
+                {% else %}
+                <img src="https://thumbs.dreamstime.com/b/abstract-racing-motorcycle-white-background-d-41156896.jpg" class="bike-image" alt="Default Image">
+                {% endif %}
             </div>
         </div>
+        
+        <!-- Right: Bike Info -->
+        <div class="col-md-8 bike-info">
+            <h1 class="animate__animated animate__fadeInRight">{{ bike.brand }} {{ bike.model }}</h1>
+            <div class="description animate__animated animate__fadeIn">
+                <h4>Description:</h4>
+                <p>{{ bike.description }}</p>
+            </div>
+            <div class="specs animate__animated animate__fadeInUp">
+                <div class="spec-item">
+                    <strong>Price per hour:</strong> 
+                    <span class="price">Rs. {{ bike.price_per_hour }}</span>
+                </div>
+                <div class="spec-item">
+                    <strong>Mileage:</strong> {{ bike.mileage }} km
+                </div>
+            </div>
+            <a href="{% url 'rent_bike' bike.id %}" class="btn btn-success btn-lg rent-btn animate__animated animate__pulse animate__infinite">Rent this Bike</a>
+        </div>
+    </div>
+
+    <!-- Comparison Form -->
+    <div class="comparison-section">
+        <h4>Compare with another bike:</h4>
+        <form method="POST" class="mt-4">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="bike2">Compare with another bike:</label>
+                <select name="bike2" id="bike2" class="form-control">
+                    {% for available_bike in bikes %}
+                        {% if available_bike.id != bike.id %}
+                            <option value="{{ available_bike.id }}">{{ available_bike.brand }} {{ available_bike.model }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Compare</button>
+        </form>
+
+        {% if comparison_bike %}
+        <div class="mt-4">
+            <h5>Comparison with {{ comparison_bike.brand }} {{ comparison_bike.model }}</h5>
+            <p>{{ comparison_text }}</p>
+            <h6>Best bike based on mileage: {{ best_bike.brand }} {{ best_bike.model }}</h6>
+        </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const bikeDetails = document.querySelector('.bike-details');
+    bikeDetails.classList.add('animate__animated', 'animate__fadeIn');
+
+    const rentBtn = document.querySelector('.rent-btn');
+    rentBtn.addEventListener('mouseover', function() {
+        this.classList.add('animate__animated', 'animate__pulse');
+    });
+    rentBtn.addEventListener('animationend', function() {
+        this.classList.remove('animate__animated', 'animate__pulse');
+    });
+});
+</script>
+</body>
+</html>

@@ -2,7 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
     <title>{% block title %}Bike Rental{% endblock %}</title>
 
     <!-- Bootstrap CSS -->
@@ -18,7 +23,7 @@
             height: 100%;
             margin: 0;
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(to right, #e66465, #9198e5); /* Background gradient */
+            /* background: linear-gradient(to right, #e66465, #9198e5); */
             color: #333;
         }
         body {
@@ -28,8 +33,8 @@
 
         /* Main Content Area */
         .content {
+            padding-top: 100px;
             flex: 1; /* Ensure content clears the fixed navbar */
-            padding: 20px;
             min-height: 100vh; /* Full viewport height */
         }
 
@@ -40,14 +45,15 @@
         }
 
         /* Footer Styling */
-        footer {
+        /* footer {
             padding: 15px 0;
             background-color: #f8f9fa;
             text-align: center;
             width: 100%;
+            height: 20vh;
             margin-top: auto;
-            border-top: 1px solid #ddd; /* Light border */
-        }
+            border-top: 1px solid #ddd; 
+        } */
 
         /* Heading Styling */
         h1, h2, h3, h4, h5, h6 {
@@ -55,7 +61,240 @@
         }
 
         /* Additional Styles Placeholder */
-        {% block extra_css %}{% endblock %}
+        .container {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 50px;
+    }
+
+    h2 {
+        color: #2c3e50;
+        font-weight: bold;
+        font-size: 2.5rem;
+    }
+
+    h4 {
+        color: #34495e;
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+
+    .comparison-table {
+        margin-top: 30px;
+        margin-bottom: 40px;
+    }
+
+    .table {
+        background-color: #ffffff;
+        border-collapse: collapse;
+        margin: 0 auto;
+        font-size: 1rem;
+    }
+
+    .table th, .table td {
+        padding: 15px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    .table th {
+        background-color: #2980b9;
+        color: white;
+    }
+
+    .table td {
+        background-color: #ecf0f1;
+        color: #34495e;
+    }
+
+    /* Image Styling */
+    img {
+        border-radius: 10px;
+        object-fit: cover;
+        height: auto;
+    }
+
+    /* Comparison Summary Styling */
+    .comparison-content {
+        margin-top: 40px;
+    }
+
+    .comparison-content p {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        color: #7f8c8d;
+        background-color: #f5f5f5;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Best Bike Section Styling */
+    .best-bike {
+        margin-top: 30px;
+        background-color: #dff9fb;
+        padding: 20px;
+        border-radius: 10px;
+        border: 2px solid #1abc9c;
+    }
+
+    .best-bike h4 {
+        color: #16a085;
+        font-weight: bold;
+    }
+
+    .best-bike p {
+        font-size: 1.2rem;
+        color: #34495e;
+    }
+
+    /* Button Styling */
+    .btn-primary {
+        background-color: #2980b9;
+        border-color: #2980b9;
+        color: white;
+        padding: 10px 20px;
+        font-size: 1.1rem;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .btn-primary:hover {
+        background-color: #1f618d;
+        border-color: #1f618d;
+    }
+
+    .btn-secondary {
+        background-color: #7f8c8d;
+        border-color: #7f8c8d;
+        color: white;
+        padding: 10px 20px;
+        font-size: 1.1rem;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5f6a6a;
+        border-color: #5f6a6a;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        h2 {
+            font-size: 2rem;
+        }
+
+        h4 {
+            font-size: 1.3rem;
+        }
+
+        .table th, .table td {
+            padding: 10px;
+        }
+
+        .btn-primary, .btn-secondary {
+            font-size: 1rem;
+        }
+    }
+
+    /* login */
+    .container {
+        margin-top: 50px;
+    }
+
+    h2 {
+        color: #2c3e50;
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+
+    .form-label {
+        font-size: 1.1rem;
+        color: #34495e;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ced4da;
+        background-color: #ecf0f1;
+        transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    }
+
+    .form-control:focus {
+        border-color: #2980b9;
+        background-color: #fff;
+        box-shadow: none;
+    }
+
+    .form-control::placeholder {
+        color: #95a5a6;
+    }
+
+    /* Button Styling */
+    .btn-primary {
+        background-color: #2980b9;
+        border: none;
+        padding: 12px 20px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        border-radius: 8px;
+        color: #fff;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    .btn-primary:hover {
+        background-color: #1f618d;
+    }
+
+    .w-100 {
+        width: 100%;
+    }
+
+    /* Link Styling */
+    .text-center a {
+        color: #2980b9;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .text-center a:hover {
+        text-decoration: underline;
+    }
+
+    /* Form Container Styling */
+    .col-md-6 {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .mt-3 {
+        margin-top: 15px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        h2 {
+            font-size: 2rem;
+        }
+
+        .form-control {
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            font-size: 1rem;
+        }
+    }
+
+    /* rental */
+    
     </style>
 </head>
 <body>
@@ -89,5 +328,21 @@
 
     <!-- Additional Scripts Placeholder -->
     {% block extra_js %}{% endblock %}
+     <!-- Swiper JS -->
+     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+     <script>
+        var swiper = new Swiper(".mySwiper", {
+          slidesPerView: 1,
+          loop: true,
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+          },
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          },
+        });
+      </script>
 </body>
 </html>

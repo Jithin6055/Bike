@@ -14,4 +14,6 @@ urlpatterns = [
 
     path('cancel_rental/<int:rental_id>/', views.cancel_rental, name='cancel_rental'),
     path('compare/', views.bike_comparison, name='bike_comparison'),
+      path('rental-visualization/', views.combined_rental_visualization, name='rental_visualization'),
+      path('sales-report/', views.sales_report_view, name='sales_report'),
 ]

@@ -31,6 +31,8 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
+    
 
     'django_light',
 
@@ -136,3 +138,139 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = 'login'  # Redirect users to 'login' if not logged in
 LOGIN_REDIRECT_URL = 'home'  # Redirect users to homepage after successful login
+
+JAZZMIN_SETTINGS = {
+    # Other settings...
+
+    "site_title": "Admin Panel",
+    "site_header": "WheelStreet Admin",
+    "site_brand": "WheelStreet",
+    "welcome_sign": "Welcome to WheelStreet",
+    "copyright": "WheelStreet",
+    "search_model": ["auth.User"],
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    "hide_models": ["auth.group", "admin_tools_stats.cached_values"],
+    "order_with_respect_to": ["auth", "main"],
+
+    "custom_links": {
+        "admin_tools_stats": [{
+            "name": "Bike rentals over time",
+            "url": "http://127.0.0.1:8000/admin_tools_stats/analytics/?show=bikerentals",
+            "icon": "fas fa-chart-line text-success fa-lg",
+            "badge": "New",
+            "badge_color": "badge-danger",
+        },
+        {
+            "name": "User Graph",
+            "url": "http://127.0.0.1:8000/admin_tools_stats/analytics/?show=usergraph",
+            "icon": "fas fa-chart-bar text-primary fa-lg",
+            "badge": "Updated",
+            "badge_color": "badge-warning",
+        }]
+    },
+
+    # Custom icons for apps
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        "main.bike": "fas fa-motorcycle",
+        "main.location": "fas fa-map",
+        "main.rental": "fas fa-store",
+    },
+
+    # Here we will inject Chart.js and Pie/Donut Chart JavaScript
+    "custom_js": """
+        document.addEventListener('DOMContentLoaded', function() {
+            var style = document.createElement('style');
+            style.innerHTML = `
+                /* Inline custom styles */
+                .btn {
+                    border-radius: 8px;
+                    transition: all 0.3s ease;
+                }
+                .btn:hover {
+                    background-color: #007bff;
+                    color: #fff;
+                }
+                body {
+                    font-family: 'Roboto', sans-serif;
+                    background-color: #f4f6f9;
+                }
+                .sidebar .nav-link {
+                    font-weight: bold;
+                }
+                .sidebar .nav-link:hover {
+                    background-color: #343a40;
+                    color: #ffffff;
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Add Chart.js library from CDN
+            var chartJsScript = document.createElement('script');
+            chartJsScript.src = 'https://cdn.jsdelivr.net/npm/chart.js';
+            document.head.appendChild(chartJsScript);
+
+            // Wait for Chart.js to load before rendering charts
+            chartJsScript.onload = function() {
+                // Create a Pie Chart
+                var ctxPie = document.getElementById('pieChart').getContext('2d');
+                var pieChart = new Chart(ctxPie, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Red', 'Blue', 'Yellow'],
+                        datasets: [{
+                            label: '# of Votes',
+                            data: [12, 19, 3],
+                            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                        }]
+                    },
+                    options: {
+                        responsive: true
+                    }
+                });
+
+                // Create a Donut Chart
+                var ctxDonut = document.getElementById('donutChart').getContext('2d');
+                var donutChart = new Chart(ctxDonut, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Direct', 'Referral', 'Organic'],
+                        datasets: [{
+                            label: '# of Users',
+                            data: [300, 50, 100],
+                            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                        }]
+                    },
+                    options: {
+                        responsive: true
+                    }
+                });
+            };
+
+            // Insert the chart containers into the page
+            var contentArea = document.querySelector('.dashboard-header'); // Or any specific place you'd like to inject the chart
+            if (contentArea) {
+                contentArea.innerHTML += `
+                    <div style="display: flex; justify-content: space-around; margin-top: 30px;">
+                        <div>
+                            <h3>Pie Chart</h3>
+                            <canvas id="pieChart" width="400" height="400"></canvas>
+                        </div>
+                        <div>
+                            <h3>Donut Chart</h3>
+                            <canvas id="donutChart" width="400" height="400"></canvas>
+                        </div>
+                    </div>
+                `;
+            }
+        });
+    """,
+
+    "use_google_fonts_cdn": True,
+    "show_ui_builder": False,
+    "changeform_format": "horizontal_tabs",
+    "changeform_format_overrides": {"auth.user": "collapsible", "auth.group": "vertical_tabs"},
+}

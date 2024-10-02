@@ -31,6 +31,10 @@ class Bike(models.Model):
     mileage = models.DecimalField(max_digits=6, decimal_places=2)  # Bike mileage in kilometers or miles
     image = models.ImageField(upload_to='bike_images/', blank=True, null=True)  # Image upload path
 
+    BIKE_TYPES_DICT = dict(BIKE_TYPES)
+
+    # Other fields...
+
     def __str__(self):
         return f'{self.brand} {self.model} - {self.bike_type}'
 

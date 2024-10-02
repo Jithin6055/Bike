@@ -8,11 +8,11 @@
     <div class="row justify-content-center">
         {% for bike in bikes %}
         <div class="col-md-4">
-            <div class="card mb-4 d-flex flex-column">
+            <div class="card mb-4 d-flex flex-column shadow-sm">
                 {% if bike.image %}
                 <img src="{{ bike.image.url }}" class="card-img-top" alt="{{ bike.model }}" style="object-fit: cover; height: 250px;">
                 {% else %}
-                <img src="https://thumbs.dreamstime.com/b/abstract-racing-motorcycle-white-background-d-41156896.jpg" class="card-img-top" alt="Default Image" style="object-fit: cover; height: 200px;">
+                <img src="https://thumbs.dreamstime.com/b/abstract-racing-motorcycle-white-background-d-41156896.jpg" class="card-img-top" alt="Default Image" style="object-fit: cover; height: 250px;">
                 {% endif %}
                 <div class="card-body flex-grow-1">
                     <h5 class="card-title">{{ bike.brand }} {{ bike.model }}</h5>
@@ -32,8 +32,43 @@
     {% endif %}
 </div>
 
-<!-- Optional Footer Message -->
-<footer class="text-center mt-4">
-    <p>&copy; {{ current_year }} WheelStreet. All rights reserved.</p>
-</footer>
+<!-- Optional CSS Enhancements -->
+<style>
+    /* General Styling */
+    body {
+        background-color: #f8f9fa;
+        font-family: Arial, sans-serif;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        transition: transform 0.2s ease;
+    }
+
+    /* Footer Styling */
+    footer {
+        background-color: #343a40;
+        color: white;
+        padding: 10px 0;
+    }
+
+    footer p {
+        margin: 0;
+    }
+
+    /* Responsive Styling for Mobile */
+    @media (max-width: 576px) {
+        .card-img-top {
+            height: 200px; /* Adjust the image height on smaller screens */
+        }
+
+        h2 {
+            font-size: 1.8rem;
+        }
+
+        .btn {
+            font-size: 0.9rem;
+        }
+    }
+</style>
 {% endblock %}

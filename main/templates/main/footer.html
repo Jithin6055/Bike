@@ -1,3 +1,57 @@
-<footer>
-    <p>© 2024 WheelStreet - All rights reserved.</p>
-</footer>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer Design</title>
+    <style>
+
+        .section-1 {
+            z-index: -100;
+            position: relative;
+            top: 750px;
+            background: linear-gradient(135deg, #292929, #252525);
+            width: 100%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-1 p {
+            font-size: 1.2rem;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .section-1 p::before, section p::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 2px;
+            background-color: white;
+            margin: 10px auto;
+        }
+
+        .section-1 p::before {
+            margin-bottom: 5px;
+        }
+
+        .section-1 p::after {
+            margin-top: 5px;
+        }
+
+        .section-1 p:hover {
+            color: #f1c40f;
+            transition: color 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <section class="section-1">
+        <p>© 2024 WheelStreet - All rights reserved.</p>
+    </section>
+</body>
+</html>

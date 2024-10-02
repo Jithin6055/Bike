@@ -4,7 +4,9 @@
 
 {% block content %}
 <div class="container">
-    <h2 class="my-4 text-center">Bike Comparison: {{ bike1.brand }} {{ bike1.model }} vs. {{ bike2.brand }} {{ bike2.model }}</h2>
+    
+    <!-- Add margin-top to the title for better positioning -->
+    <h2 class="my-4 text-center mt-5">Bike Comparison: {{ bike1.brand }} {{ bike1.model }} vs. {{ bike2.brand }} {{ bike2.model }}</h2> <!-- Added mt-5 for more space above the title -->
 
     <div class="comparison-table">
         <h4>Specifications Comparison:</h4>
@@ -48,11 +50,142 @@
 
     <!-- Best bike section -->
     <div class="best-bike mt-4">
-        <h4>Best Bike:</h4>
+        <h4 style="color: white;">Best Bike:</h4>
         <p>The best bike is <strong>{{ best_bike.brand }} {{ best_bike.model }}</strong> based on mileage!</p>
         <a href="{% url 'bike_detail' best_bike.id %}" class="btn btn-primary">View Details</a>
     </div>
     
     <a href="{% url 'bike_comparison' %}" class="btn btn-secondary mt-3">Compare Again</a>
 </div>
+<style>
+    body {
+        background-color: #f5f5f5;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .container {
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        margin-top: 50px;
+    }
+
+    h2 {
+        color: #2c3e50;
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 30px;
+    }
+
+    h4 {
+        color: #34495e;
+        font-size: 1.4rem;
+        font-weight: 500;
+        margin-bottom: 20px;
+    }
+
+    .table {
+        margin-top: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .table thead {
+        background-color: #2980b9;
+        color: white;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .table th, .table td {
+        text-align: center;
+        vertical-align: middle;
+        padding: 15px;
+        font-size: 1rem;
+        color: #2c3e50;
+    }
+
+    .table td img {
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .comparison-content {
+        margin-top: 40px;
+        background-color: #ecf0f1;
+        padding: 20px;
+        border-radius: 8px;
+        color: #2c3e50;
+    }
+
+    .comparison-content p {
+        font-size: 1.1rem;
+    }
+
+    .best-bike {
+        background-color: #4a97c4;
+        padding: 20px;
+        border-radius: 8px;
+        margin-top: 30px;
+        color: white;
+        text-align: center;
+    }
+
+    .best-bike p {
+        font-size: 1.2rem;
+    }
+
+    .btn {
+        border-radius: 50px;
+        padding: 10px 30px;
+        font-size: 1rem;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .btn-primary {
+        background-color: #2980b9;
+        border-color: #2980b9;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background-color: #1a5a85;
+        border-color: #1a5a85;
+    }
+
+    .btn-secondary {
+        background-color: #bdc3c7;
+        border-color: #bdc3c7;
+        color: #2c3e50;
+    }
+
+    .btn-secondary:hover {
+        background-color: #7f8c8d;
+        border-color: #7f8c8d;
+    }
+
+    @media (max-width: 768px) {
+        h2 {
+            font-size: 1.6rem;
+        }
+
+        h4 {
+            font-size: 1.2rem;
+        }
+
+        .table th, .table td {
+            font-size: 0.9rem;
+            padding: 10px;
+        }
+
+        .best-bike p {
+            font-size: 1rem;
+        }
+    }
+</style>
+
 {% endblock %}
+

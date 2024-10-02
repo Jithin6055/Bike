@@ -6,7 +6,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <h2 class="my-4 text-center">Login</h2>
+        
+            <!-- Add margin-top to the title for better positioning -->
+            <h2 class="my-4 text-center mt-5">Login</h2> <!-- Added mt-5 for more space above the title -->
             <form method="POST" action="{% url 'login' %}">
                 {% csrf_token %}
                 <div class="mb-3">
@@ -26,4 +28,110 @@
         </div>
     </div>
 </div>
+<style>
+    /* General Body Styling */
+
+    .container {
+        margin-top: 50px;
+    }
+
+    /* Title Styling */
+    h2 {
+        color: #2c3e50;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 30px;
+    }
+
+    /* Form Container */
+    form {
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-label {
+        font-size: 1.1rem;
+        color: #34495e;
+        font-weight: 600;
+    }
+
+    /* Input Fields */
+    .form-control {
+        padding: 12px;
+        font-size: 1rem;
+        border-radius: 6px;
+        border: 1px solid #ced4da;
+        transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .form-control:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 8px rgba(52, 152, 219, 0.2);
+    }
+
+    .form-control::placeholder {
+        color: #95a5a6;
+        font-style: italic;
+    }
+
+    /* Button Styling */
+    .btn-primary {
+        background-color: #2980b9;
+        color: #fff;
+        font-weight: 600;
+        padding: 12px;
+        font-size: 1.1rem;
+        border: none;
+        border-radius: 8px;
+        width: 100%;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #166fab;
+    }
+
+    /* Additional Link Styling */
+    .text-center a {
+        color: #3498db;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .text-center a:hover {
+        color: #2980b9;
+        text-decoration: underline;
+    }
+
+    /* Margin Adjustments */
+    .mt-3 {
+        margin-top: 1.5rem;
+    }
+
+    .mb-3 {
+        margin-bottom: 1.5rem;
+    }
+
+    .my-4 {
+        margin: 2rem 0;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        h2 {
+            font-size: 2rem;
+        }
+
+        .form-control {
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            font-size: 1rem;
+        }
+    }
+</style>
+
 {% endblock %}
